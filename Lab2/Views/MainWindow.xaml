@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Main" MinHeight="450" Height="450" MinWidth="300" Width="300">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.25*" />
+        </Grid.ColumnDefinitions>
         
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="18" Margin="12">
+                Kovalov Alex, Lab 2
+            </TextBlock>
+            
+            <Button Content="Task 1 | Grid" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 1 | ..." Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 1 | ..." Style="{StaticResource CustomButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </Window>
