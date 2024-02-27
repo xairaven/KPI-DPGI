@@ -1,15 +1,7 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Lab2.Views.Task1;
 
-namespace Lab2;
+namespace Lab2.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -19,5 +11,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    private void Task1Grid(object sender, RoutedEventArgs e)
+    {
+        new GridTask().Show();
     }
 }
