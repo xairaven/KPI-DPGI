@@ -22,4 +22,9 @@ public partial class MainWindow : Window
     {
         new StackPanelTask().Show();
     }
+    
+    private void Task1WrapPanel(object sender, RoutedEventArgs e)
+    {
+        new WrapPanelTask().Show();
+    }
 }
