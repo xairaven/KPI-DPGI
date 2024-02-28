@@ -17,4 +17,9 @@ public partial class MainWindow : Window
     {
         new GridTask().Show();
     }
+    
+    private void Task1StackPanel(object sender, RoutedEventArgs e)
+    {
+        new StackPanelTask().Show();
+    }
 }
