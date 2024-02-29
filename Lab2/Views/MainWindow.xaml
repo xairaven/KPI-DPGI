@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Main" MinHeight="550" Height="550" MinWidth="350" Width="350">
+        Title="Main" MinHeight="600" Height="600" MinWidth="400" Width="400">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="40" />
@@ -34,7 +34,8 @@
             <Button Content="Task 1 | DockPanel" Click="Task1DockPanel" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 1 | Canvas" Click="Task1Canvas" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 2 | TextEditor" Click="Task2TextEditor" Style="{StaticResource CustomButtonStyle}"/>
-            <Button Content="Task 3 | TextEditor" Click="Task3TextEditor" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 3 | Resources" Click="Task3TextEditor" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 4 | Binding" Click="Task4TextEditor" Style="{StaticResource CustomButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Window>

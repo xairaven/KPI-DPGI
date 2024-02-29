@@ -47,4 +47,9 @@ public partial class MainWindow : Window
     {
         new Task3.TextEditor().Show();
     }
+
+    private void Task4TextEditor(object sender, RoutedEventArgs e)
+    {
+        new Task4.TextEditor().Show();
+    }
 }
