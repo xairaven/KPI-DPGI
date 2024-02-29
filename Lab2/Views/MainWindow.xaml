@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lab2"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Main" MinHeight="450" Height="450" MinWidth="300" Width="300">
+        Title="Main" MinHeight="550" Height="550" MinWidth="350" Width="350">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="40" />
@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="18" Margin="12">
+            <TextBlock HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="18" Margin="0 0 0 12">
                 Kovalov Alex, Lab 2
             </TextBlock>
             
@@ -34,6 +34,7 @@
             <Button Content="Task 1 | DockPanel" Click="Task1DockPanel" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 1 | Canvas" Click="Task1Canvas" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 2 | TextEditor" Click="Task2TextEditor" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 3 | TextEditor" Click="Task3TextEditor" Style="{StaticResource CustomButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Window>

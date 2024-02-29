@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Lab2.Views.Task1;
-using Lab2.Views.Task2;
 
 namespace Lab2.Views;
 
@@ -41,6 +40,11 @@ public partial class MainWindow : Window
 
     private void Task2TextEditor(object sender, RoutedEventArgs e)
     {
-        new TextEditor().Show();
+        new Task2.TextEditor().Show();
+    }
+
+    private void Task3TextEditor(object sender, RoutedEventArgs e)
+    {
+        new Task3.TextEditor().Show();
     }
 }
