@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Lab2.Views.Task1;
+using Lab2.Views.Task2;
 
 namespace Lab2.Views;
 
@@ -36,5 +37,10 @@ public partial class MainWindow : Window
     private void Task1Canvas(object sender, RoutedEventArgs e)
     {
         new CanvasTask().Show();
+    }
+
+    private void Task2TextEditor(object sender, RoutedEventArgs e)
+    {
+        new TextEditor().Show();
     }
 }
