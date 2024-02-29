@@ -32,6 +32,7 @@
             <Button Content="Task 1 | StackPanel" Click="Task1StackPanel" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 1 | WrapPanel" Click="Task1WrapPanel" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 1 | DockPanel" Click="Task1DockPanel" Style="{StaticResource CustomButtonStyle}"/>
+            <Button Content="Task 1 | Canvas" Click="Task1Canvas" Style="{StaticResource CustomButtonStyle}"/>
             <Button Content="Task 1 | ..." Style="{StaticResource CustomButtonStyle}"/>
         </StackPanel>
     </Grid>

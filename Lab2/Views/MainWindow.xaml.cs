@@ -32,4 +32,9 @@ public partial class MainWindow : Window
     {
         new DockPanelTask().Show();
     }
+
+    private void Task1Canvas(object sender, RoutedEventArgs e)
+    {
+        new CanvasTask().Show();
+    }
 }
