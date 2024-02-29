@@ -27,4 +27,9 @@ public partial class MainWindow : Window
     {
         new WrapPanelTask().Show();
     }
+    
+    private void Task1DockPanel(object sender, RoutedEventArgs e)
+    {
+        new DockPanelTask().Show();
+    }
 }
