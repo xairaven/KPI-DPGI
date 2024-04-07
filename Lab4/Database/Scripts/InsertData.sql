@@ -16,7 +16,7 @@ WITH (
     ROWTERMINATOR = '\n',
     FIRSTROW = 2
 );
-INSERT INTO Books
+INSERT INTO dbo.Books
 SELECT * FROM #BulkBooks;
 DROP TABLE IF EXISTS #BulkBooks;
 GO;
