@@ -59,7 +59,7 @@ public partial class UpdateForm : Window
 
     private async Task<bool> IsValidationPassed()
     {
-        var isIsbnExist = (await ValidateFields.IsbnExists(ISBNBox.Text.Trim(), _initIsbn, _wrapper));
+        var isIsbnExist = (await ValidateFields.IsbnExists(_wrapper, ISBNBox.Text.Trim(), _initIsbn));
         
             return !IsThereEmptyField() &&
                    !isIsbnExist &&

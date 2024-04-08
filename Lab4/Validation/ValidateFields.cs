@@ -6,7 +6,7 @@ namespace Lab4.Validation;
 
 public static class ValidateFields
 {
-    public static async Task<bool> IsbnExists(string isbn, string initIsbn, AdoWrapper wrapper)
+    public static async Task<bool> IsbnExists(AdoWrapper wrapper, string isbn, string initIsbn = "")
     {
         const string query = "SELECT isbn FROM Books";
 
@@ -16,7 +16,7 @@ public static class ValidateFields
         {
             var tableIsbn = row["isbn"].ToString()!;
 
-            if (isbn.Trim().Equals(initIsbn.Trim()))
+            if (!initIsbn.Equals("") && isbn.Trim().Equals(initIsbn.Trim()))
             {
                 continue;
             }
