@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Lab4.Views"
         mc:Ignorable="d"
-        Title="Update Form" Height="400" MinHeight="400" Width="350" MinWidth="350"
+        Title="Update Form" Height="350" MinHeight="350" Width="350" MinWidth="350"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>

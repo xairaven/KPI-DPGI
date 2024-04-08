@@ -23,7 +23,7 @@ public partial class MainWindow : Window
         await LoadListBox();
     }
 
-    private async Task LoadListBox()
+    public async Task LoadListBox()
     {
         const string query = "SELECT * FROM Books";
 
@@ -54,7 +54,7 @@ public partial class MainWindow : Window
             return;
         }
         
-        new UpdateForm(selectedItem).Show();
+        new UpdateForm(selectedItem, this).Show();
     }
 
     private async void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
