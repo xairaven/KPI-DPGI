@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -49,40 +50,16 @@ public class AdoWrapper
         }
     }
     
-    public async Task<Dictionary<string, List<string>>> ExecuteReader(string query)
+    public async Task<DataTable> ExecuteReader(string query)
     {
         await using var connection = new SqlConnection(_connectionString);
         await connection.OpenAsync();
 
-        var command = new SqlCommand(cmdText: query, 
-            connection: connection);
-
-        var resultDict = new Dictionary<string, List<string>>();
-            
-        await using (var reader = await command.ExecuteReaderAsync())
-        {
-            var columns = reader.FieldCount;
-
-            // If query result has 0 rows
-            if (!reader.HasRows) return resultDict;
-                
-            for (int i = 0; i < columns; i++)
-            {
-                resultDict[reader.GetName(i)] = [];
-            }
- 
-            while (await reader.ReadAsync()) // построчно считываем данные
-            {
-                for (int i = 0; i < columns; i++)
-                {
-                    var columnTitle = reader.GetName(i);
-                        
-                    resultDict[columnTitle].Add(reader.GetValue(0).ToString()!);
-                }
-            }
-        }
-
-        return resultDict;
+        var adapter = new SqlDataAdapter(query, connection);
+        var table = new DataTable();
+        adapter.Fill(table);
+        
+        return table;
     }
     
     public async Task<double> ExecuteScalar(string query)
