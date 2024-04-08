@@ -37,8 +37,10 @@ public class AdoWrapper
         _connectionString = connectionString;
     }
 
-    public async void ExecuteNonQuery(string query)
+    public async Task<int> ExecuteNonQuery(string query)
     {
+        int rowsAffected;
+        
         await using (var connection = new SqlConnection(_connectionString))
         {
             await connection.OpenAsync();
@@ -46,8 +48,10 @@ public class AdoWrapper
             var command = new SqlCommand(cmdText: query, 
                 connection: connection);
             
-            await command.ExecuteNonQueryAsync();
+            rowsAffected = await command.ExecuteNonQueryAsync();
         }
+
+        return rowsAffected;
     }
     
     public async Task<DataTable> ExecuteReader(string query)
