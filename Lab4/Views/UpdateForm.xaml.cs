@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Windows;
 using Lab4.Database;
+using Lab4.Validation;
 
 namespace Lab4.Views;
 
@@ -28,9 +29,7 @@ public partial class UpdateForm : Window
 
     private async void OkButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var isIsbnExist = !(await CheckIsbn(ISBNBox.Text.Trim()));
-        
-        if (!VerifyFields() || isIsbnExist || !CheckCastYear(PubYearBox.Text.Trim())) return;
+        if (!await IsValidationPassed()) return;
         
         var query = @$"UPDATE Books
                         SET isbn = '{ISBNBox.Text.Trim()}',
@@ -58,67 +57,21 @@ public partial class UpdateForm : Window
         Close();
     }
 
-    private bool VerifyFields()
+    private async Task<bool> IsValidationPassed()
     {
-        if (!ISBNBox.Text.Trim().Equals("") &&
-            !TitleBox.Text.Trim().Equals("") &&
-            !AuthorsBox.Text.Trim().Equals("") &&
-            !PubBox.Text.Trim().Equals("") &&
-            !PubYearBox.Text.Trim().Equals("")) return true;
+        var isIsbnExist = (await ValidateFields.IsbnExists(ISBNBox.Text.Trim(), _initIsbn, _wrapper));
         
-        
-        MessageBox.Show(messageBoxText: "Some field is empty.",
-            caption: "Error!",
-            button: MessageBoxButton.OK,
-            icon: MessageBoxImage.Error,
-            defaultResult: MessageBoxResult.OK);
-
-        return false;
+            return !IsThereEmptyField() &&
+                   !isIsbnExist &&
+                   ValidateFields.CanCastYear(PubYearBox.Text.Trim());
     }
-
-    private async Task<bool> CheckIsbn(string isbn)
+    
+    private bool IsThereEmptyField()
     {
-        const string query = "SELECT isbn FROM Books";
-
-        var table = await _wrapper.ExecuteReader(query);
-        
-        foreach(DataRow row in table.Rows)
-        {
-            var tableIsbn = row["isbn"].ToString()!;
-
-            if (isbn.Trim().Equals(_initIsbn.Trim()))
-            {
-                continue;
-            }
-
-            if (isbn.Trim().Equals(tableIsbn.Trim()))
-            {
-                MessageBox.Show(messageBoxText: "There's already some ISBN like this",
-                    caption: "Error!",
-                    button: MessageBoxButton.OK,
-                    icon: MessageBoxImage.Error,
-                    defaultResult: MessageBoxResult.OK);
-                
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private bool CheckCastYear(string year)
-    {
-        var canBeCasted = int.TryParse(year, out _);
-
-        if (!canBeCasted)
-        {
-            MessageBox.Show(messageBoxText: "Something wrong with year",
-                caption: "Error!",
-                button: MessageBoxButton.OK,
-                icon: MessageBoxImage.Error,
-                defaultResult: MessageBoxResult.OK);
-        }
-
-        return canBeCasted;
+        return ValidateFields.IsEmpty(ISBNBox.Text) ||
+        ValidateFields.IsEmpty(TitleBox.Text) ||
+        ValidateFields.IsEmpty(AuthorsBox.Text) ||
+        ValidateFields.IsEmpty(PubBox.Text) ||
+        ValidateFields.IsEmpty(PubYearBox.Text);
     }
 }

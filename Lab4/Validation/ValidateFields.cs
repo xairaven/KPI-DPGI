@@ -6,7 +6,7 @@ namespace Lab4.Validation;
 
 public static class ValidateFields
 {
-    public static async Task<bool> Isbn(string isbn, string initIsbn, AdoWrapper wrapper)
+    public static async Task<bool> IsbnExists(string isbn, string initIsbn, AdoWrapper wrapper)
     {
         const string query = "SELECT isbn FROM Books";
 
@@ -29,14 +29,14 @@ public static class ValidateFields
                     icon: MessageBoxImage.Error,
                     defaultResult: MessageBoxResult.OK);
                 
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
-    public static bool CastYear(string year)
+    public static bool CanCastYear(string year)
     {
         var canBeCasted = int.TryParse(year, out _);
 
@@ -54,14 +54,17 @@ public static class ValidateFields
     
     public static bool IsEmpty(string field)
     {
-        if (!field.Trim().Equals("")) return false;
-        
-        MessageBox.Show(messageBoxText: "Some field is empty.",
-            caption: "Error!",
-            button: MessageBoxButton.OK,
-            icon: MessageBoxImage.Error,
-            defaultResult: MessageBoxResult.OK);
+        var isEmpty = field.Trim().Equals("");
 
-        return true;
+        if (isEmpty)
+        {
+            MessageBox.Show(messageBoxText: "Some field is empty.",
+                caption: "Error!",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+        }
+
+        return isEmpty;
     }
 }

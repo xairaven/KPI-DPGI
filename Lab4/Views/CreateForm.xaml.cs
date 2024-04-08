@@ -1,11 +1,18 @@
 ﻿using System.Windows;
+using Lab4.Database;
 
 namespace Lab4.Views;
 
 public partial class CreateForm : Window
 {
-    public CreateForm()
+    private readonly MainWindow _window;
+    private readonly AdoWrapper _wrapper;
+    
+    public CreateForm(MainWindow window)
     {
+        _window = window;
+        _wrapper = new AdoWrapper();
+        
         InitializeComponent();
     }
     

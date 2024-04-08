@@ -36,7 +36,7 @@ public partial class MainWindow : Window
     
     private void ButtonCreate_OnClick(object sender, RoutedEventArgs e)
     {
-        new CreateForm().Show();
+        new CreateForm(this).Show();
     }
 
     private void ButtonUpdate_OnClick(object sender, RoutedEventArgs e)
