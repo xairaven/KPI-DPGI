@@ -74,7 +74,7 @@ public partial class MainWindow : Window
         
         var isbn = selectedItem["isbn"].ToString();
 
-        var query = $"DELETE FROM Books WHERE isbn = {isbn}";
+        var query = @$"DELETE FROM Books WHERE isbn = '{isbn}'";
         var affectedRows = await _wrapper.ExecuteNonQuery(query);
         
         MessageBox.Show(messageBoxText: $"Affected rows: {affectedRows}",
