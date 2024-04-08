@@ -47,26 +47,31 @@
             <TextBlock Grid.Column="0" Grid.Row="1" Margin="5">ISBN:</TextBlock>
             <TextBox Grid.Row="1" Grid.Column="1"
                      Text="{Binding SelectedItem.isbn, ElementName=MainListBox, Mode=OneWay}"
+                     IsReadOnly="True"
                      Focusable="True" />
 
             <TextBlock Grid.Column="0" Grid.Row="2" Margin="5">Title:</TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1"
                      Text="{Binding SelectedItem.title, ElementName=MainListBox, Mode=OneWay}"
+                     IsReadOnly="True"
                      Focusable="True" />
 
             <TextBlock Grid.Column="0" Grid.Row="3" Margin="5">Authors:</TextBlock>
             <TextBox Grid.Row="3" Grid.Column="1"
                      Text="{Binding SelectedItem.authors, ElementName=MainListBox, Mode=OneWay}"
+                     IsReadOnly="True"
                      Focusable="True" />
 
             <TextBlock Grid.Column="0" Grid.Row="4" Margin="5">Publisher:</TextBlock>
             <TextBox Grid.Row="4" Grid.Column="1"
                      Text="{Binding SelectedItem.publisher, ElementName=MainListBox, Mode=OneWay}"
+                     IsReadOnly="True"
                      Focusable="True" />
 
             <TextBlock Grid.Column="0" Grid.Row="5" Margin="5">Publication Year:</TextBlock>
             <TextBox Grid.Row="5" Grid.Column="1"
                      Text="{Binding SelectedItem.publication_year, ElementName=MainListBox, Mode=OneWay}"
+                     IsReadOnly="True"
                      Focusable="True" />
         </Grid>
     </DockPanel>
