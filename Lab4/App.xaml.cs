@@ -1,4 +1,5 @@
-﻿using Lab4.Database;
+﻿using System.Configuration;
+using Lab4.Database;
 
 namespace Lab4;
 
@@ -9,6 +10,9 @@ public partial class App
 {
     public App()
     {
-        DbConnection.Start();
+        var connectionString = ConfigurationManager.ConnectionStrings["connectionString_ADO"]
+            .ConnectionString;
+        
+        AdoWrapper.ConfigureConnectionString(connectionString);
     }
 }
