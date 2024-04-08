@@ -9,11 +9,11 @@
         Title="Lab4" Height="450" Width="800">
     <DockPanel>
         <ToolBar Height="25" VerticalAlignment="Top" DockPanel.Dock="Top">
-            <Button>Create</Button>
+            <Button Click="ButtonCreate_OnClick">Create</Button>
             <Separator />
-            <Button>Update</Button>
+            <Button Click="ButtonUpdate_OnClick">Update</Button>
             <Separator />
-            <Button>Delete</Button>
+            <Button Click="ButtonDelete_OnClick">Delete</Button>
         </ToolBar>
 
 
