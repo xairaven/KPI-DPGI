@@ -41,7 +41,20 @@ public partial class MainWindow : Window
 
     private void ButtonUpdate_OnClick(object sender, RoutedEventArgs e)
     {
-        new UpdateForm().Show();
+        var selectedItem = MainListBox.SelectedItem as DataRowView;
+        
+        if (selectedItem is null)
+        {
+            MessageBox.Show(messageBoxText: "Select item if you want update it, please.",
+                caption: "Error!",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+            
+            return;
+        }
+        
+        new UpdateForm(selectedItem).Show();
     }
 
     private async void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
