@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Lab4.Database;
 
 namespace Lab4;
 
@@ -20,4 +21,18 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        var wrapper = new AdoWrapper();
+
+        const string query = "SELECT * FROM Books";
+
+        var table = await wrapper.ExecuteReader(query);
+        
+        MainListBox.SelectedIndex = 0;
+        MainListBox.Focus();
+        MainListBox.DataContext = table;
+    }
+
 }
