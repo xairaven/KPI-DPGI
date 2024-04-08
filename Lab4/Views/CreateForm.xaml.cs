@@ -31,7 +31,7 @@ public partial class CreateForm : Window
         var affectedRows = await _wrapper.ExecuteNonQuery(query);
 
         MessageBox.Show(messageBoxText: $"Affected rows: {affectedRows}",
-            caption: "Update operation results",
+            caption: "Create operation results",
             button: MessageBoxButton.OK,
             icon: MessageBoxImage.Information,
             defaultResult: MessageBoxResult.OK);
