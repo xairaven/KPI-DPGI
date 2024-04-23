@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Lab5.Context;
 using Lab5.Entities;
 using LinqKit;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Lab5.Views;
@@ -43,7 +42,7 @@ public partial class MainWindow : Window
         JoinedGrid.DataContext = joined.ToList();
     }
 
-    private void SearchBooksLinqTextChanged(object sender, TextChangedEventArgs e)
+    private void SearchBooksTextChanged(object sender, TextChangedEventArgs e)
     {
         using var dbContext = new LibraryDbContext();
 
@@ -62,6 +61,29 @@ public partial class MainWindow : Window
         if (year != 0) predicate.And(b => b.PublicationYear == year);
         
         SearchBooksGrid.DataContext = dbContext.Books.Where(predicate).ToList();
+    }
+    
+    private void SearchByPublisher(object sender, TextChangedEventArgs e)
+    {
+        using var dbContext = new LibraryDbContext();
+        
+        var publisher = PublisherSearchBox.Text.Trim();
+        
+        var joined = dbContext.Books.Join(dbContext.Publishers,
+            x => x.PublisherCode,
+            y => y.Id,
+            (x, y) => new
+            {
+                x.Isbn,
+                x.Title,
+                x.Authors,
+                Publisher = y.Name,
+                x.PublicationYear
+            });
+
+        SearchByPublisherGrid.DataContext = joined
+            .Where(b => b.Publisher.Contains(publisher))
+            .ToList();
     }
     
     private static string ZeroIfEmpty(string s)

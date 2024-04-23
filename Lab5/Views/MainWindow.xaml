@@ -41,7 +41,7 @@
                 </DataGrid>
             </TabItem>
 
-            <TabItem Header="Search Linq | Books">
+            <TabItem Header="Search | Books">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -58,32 +58,32 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0"  Margin="5">ISBN:</TextBlock>
                     <TextBox x:Name="IsbnBox" 
-                             TextChanged="SearchBooksLinqTextChanged"
+                             TextChanged="SearchBooksTextChanged"
                         Grid.Row="0" Grid.Column="1"
                              Focusable="True" />
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Title:</TextBlock>
                     <TextBox x:Name="TitleBox" 
-                             TextChanged="SearchBooksLinqTextChanged"
+                             TextChanged="SearchBooksTextChanged"
                              Grid.Row="1" Grid.Column="1"
                              Focusable="True" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Authors:</TextBlock>
                     <TextBox x:Name="AuthorsBox"
-                             TextChanged="SearchBooksLinqTextChanged"
+                             TextChanged="SearchBooksTextChanged"
                              Grid.Row="2" Grid.Column="1"
                              Focusable="True" />
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Margin="5">Publisher:</TextBlock>
                     <TextBox x:Name="PublisherCodeBox" 
-                             TextChanged="SearchBooksLinqTextChanged"
+                             TextChanged="SearchBooksTextChanged"
                              PreviewTextInput="NumberValidationTextBox"
                              Grid.Row="3" Grid.Column="1"
                              Focusable="True" />
 
                     <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">Publication Year:</TextBlock>
                     <TextBox x:Name="PublicationYearBox" 
-                             TextChanged="SearchBooksLinqTextChanged"
+                             TextChanged="SearchBooksTextChanged"
                              PreviewTextInput="NumberValidationTextBox"
                              Grid.Row="4" Grid.Column="1"
                              Focusable="True" />
@@ -99,6 +99,31 @@
                             <DataGridTextColumn Header="Publisher Code" Binding="{Binding PublisherCode}" />
                             <DataGridTextColumn Header="Publication Year" Binding="{Binding PublicationYear}" />
                         </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Search | By Publisher">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">Publisher:</TextBlock>
+                    <TextBox x:Name="PublisherSearchBox" 
+                             TextChanged="SearchByPublisher"
+                             Grid.Row="0" Grid.Column="1"
+                             Focusable="True" />
+                    
+                    <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                              x:Name="SearchByPublisherGrid"
+                              AutoGenerateColumns="True"
+                              ItemsSource="{Binding}">
                     </DataGrid>
                 </Grid>
             </TabItem>
