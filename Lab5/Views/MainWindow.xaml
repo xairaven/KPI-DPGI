@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab5.Views"
         mc:Ignorable="d"
-        Title="Lab 5" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Lab 5" MinHeight="450" Height="450" MinWidth="800" Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="Books">
