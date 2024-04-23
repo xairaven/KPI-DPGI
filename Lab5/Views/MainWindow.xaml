@@ -9,7 +9,7 @@
         Title="Lab 5" MinHeight="450" Height="450" MinWidth="800" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Books">
+            <TabItem Header="Books Table">
                 <DataGrid x:Name="BooksGrid"
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding}">
@@ -23,7 +23,7 @@
                 </DataGrid>
             </TabItem>
             
-            <TabItem Header="Publishers">
+            <TabItem Header="Publishers Table">
                 <DataGrid x:Name="PublishersGrid"
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding}">
@@ -31,6 +31,13 @@
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                     </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            
+            <TabItem Header="Joined Table">
+                <DataGrid x:Name="JoinedGrid"
+                          AutoGenerateColumns="True"
+                          ItemsSource="{Binding}">
                 </DataGrid>
             </TabItem>
         </TabControl>
