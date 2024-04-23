@@ -22,7 +22,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
+
             <TabItem Header="Publishers Table">
                 <DataGrid x:Name="PublishersGrid"
                           AutoGenerateColumns="False"
@@ -33,12 +33,74 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
+
             <TabItem Header="Joined Table">
                 <DataGrid x:Name="JoinedGrid"
                           AutoGenerateColumns="True"
                           ItemsSource="{Binding}">
                 </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Search Linq | Books">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Margin="5">ISBN:</TextBlock>
+                    <TextBox x:Name="IsbnBox" 
+                             TextChanged="SearchBooksLinqTextChanged"
+                        Grid.Row="0" Grid.Column="1"
+                             Focusable="True" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Title:</TextBlock>
+                    <TextBox x:Name="TitleBox" 
+                             TextChanged="SearchBooksLinqTextChanged"
+                             Grid.Row="1" Grid.Column="1"
+                             Focusable="True" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Authors:</TextBlock>
+                    <TextBox x:Name="AuthorsBox"
+                             TextChanged="SearchBooksLinqTextChanged"
+                             Grid.Row="2" Grid.Column="1"
+                             Focusable="True" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Margin="5">Publisher:</TextBlock>
+                    <TextBox x:Name="PublisherCodeBox" 
+                             TextChanged="SearchBooksLinqTextChanged"
+                             PreviewTextInput="NumberValidationTextBox"
+                             Grid.Row="3" Grid.Column="1"
+                             Focusable="True" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">Publication Year:</TextBlock>
+                    <TextBox x:Name="PublicationYearBox" 
+                             TextChanged="SearchBooksLinqTextChanged"
+                             PreviewTextInput="NumberValidationTextBox"
+                             Grid.Row="4" Grid.Column="1"
+                             Focusable="True" />
+                    
+                    <DataGrid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                              x:Name="SearchBooksGrid"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ISBN" Binding="{Binding Isbn}" />
+                            <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
+                            <DataGridTextColumn Header="Authors" Binding="{Binding Authors}" />
+                            <DataGridTextColumn Header="Publisher Code" Binding="{Binding PublisherCode}" />
+                            <DataGridTextColumn Header="Publication Year" Binding="{Binding PublicationYear}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

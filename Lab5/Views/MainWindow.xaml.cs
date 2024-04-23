@@ -1,6 +1,12 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Lab5.Context;
+using Lab5.Entities;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Lab5.Views;
 
@@ -35,5 +41,37 @@ public partial class MainWindow : Window
             });
 
         JoinedGrid.DataContext = joined.ToList();
+    }
+
+    private void SearchBooksLinqTextChanged(object sender, TextChangedEventArgs e)
+    {
+        using var dbContext = new LibraryDbContext();
+
+        var isbn = IsbnBox.Text.Trim();
+        var title = TitleBox.Text.Trim();
+        var authors = AuthorsBox.Text.Trim();
+        var code = Convert.ToDecimal(ZeroIfEmpty(PublisherCodeBox.Text.Trim()));
+        var year = Convert.ToDecimal(ZeroIfEmpty(PublicationYearBox.Text.Trim()));
+        
+        var predicate = PredicateBuilder.New<Book>();
+
+        if (!isbn.IsNullOrEmpty()) predicate.And(b => b.Isbn.Contains(isbn));
+        if (!title.IsNullOrEmpty()) predicate.And(b => b.Title.Contains(title));
+        if (!authors.IsNullOrEmpty()) predicate.And(b => b.Authors.Contains(authors));
+        if (code != 0) predicate.And(b => b.PublisherCode == code);
+        if (year != 0) predicate.And(b => b.PublicationYear == year);
+        
+        SearchBooksGrid.DataContext = dbContext.Books.Where(predicate).ToList();
+    }
+    
+    private static string ZeroIfEmpty(string s)
+    {
+        return string.IsNullOrEmpty(s) ? "0" : s;
+    }
+    
+    private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+    {
+        var regex = new Regex("[^0-9]+");
+        e.Handled = regex.IsMatch(e.Text);
     }
 }
