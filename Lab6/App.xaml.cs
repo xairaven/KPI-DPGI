@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.IO;
 using System.Windows;
 
 namespace Lab6;
@@ -10,9 +11,13 @@ public partial class App : Application
 {
     public App()
     {
+        // Register Syncfusion license
         var key = ConfigurationManager.AppSettings["SyncFusionKey"];
-        
-        //Register Syncfusion license
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(key);
+        
+        // Setting DataDirectory
+        var executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        var path = Path.GetDirectoryName(executable);
+        AppDomain.CurrentDomain.SetData("DataDirectory", path);
     }
 }

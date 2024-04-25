@@ -18,8 +18,20 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<Alarm> Alarms { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite(ConfigurationManager.
-            ConnectionStrings["ApplicationDatabase"].ConnectionString);
+    {
+        var connectionString = ConfigurationManager.
+            ConnectionStrings["ApplicationDatabase"].ConnectionString;
+        
+        var dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory")!.ToString()!;
+        if (!string.IsNullOrEmpty(dataDirectory))
+        {
+            connectionString = connectionString
+                .Replace("|DataDirectory|", dataDirectory);
+        }
+        
+        optionsBuilder.UseSqlite(connectionString);
+    }
+        
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

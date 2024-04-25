@@ -85,9 +85,9 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Database\Alarms.db" />
-        <Resource Include="Database\Alarms.db">
+        <Content Include="Database\Alarms.db">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Resource>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
