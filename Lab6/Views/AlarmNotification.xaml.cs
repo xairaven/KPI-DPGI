@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using Lab6;
 using Lab6.Context;
+using Lab6.Entities;
 using Lab6.Enums;
-using Lab6.Model;
 
 namespace Lab6.Views;
 
@@ -12,9 +11,9 @@ public partial class AlarmNotification : Window
 {
     private SettingsContext _context;
     private MediaPlayer _mediaPlayer;
-    private AlarmRecord _record;
+    private Alarm _record;
     
-    public AlarmNotification(SettingsContext context, AlarmRecord record)
+    public AlarmNotification(SettingsContext context, Alarm record)
     {
         _context = context;
         _record = record;
@@ -47,7 +46,7 @@ public partial class AlarmNotification : Window
             TitleLabel.Content = _record.Title;
         } else TitleLabel.Content = "None";
         
-        var dateTime = _record.DateTime;
+        var dateTime = _record.Datetime;
         TimeLabel.Content = $"{dateTime.Hour:00}:{dateTime.Minute:00}";
         DateLabel.Content = $"{dateTime.Day:00}.{dateTime.Month:00}.{dateTime.Year:0000}";
     }

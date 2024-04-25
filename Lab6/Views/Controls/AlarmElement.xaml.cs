@@ -66,7 +66,7 @@ public partial class AlarmElement : UserControl
         IsAlarmEnabled = !IsAlarmEnabled;
 
         var record = AlarmRepository.GetRecord(Id);
-        AlarmRepository.EditRecord(Id, record.Title, record.DateTime, IsAlarmEnabled);
+        AlarmRepository.EditRecord(Id, record.Title, record.Datetime, IsAlarmEnabled);
     }
 
     private void EditAlarm(object sender, RoutedEventArgs e)

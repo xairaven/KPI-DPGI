@@ -1,103 +1,90 @@
-﻿using System.IO;
-using Lab6.Model;
-using Lab6.Serializing;
+﻿using Lab6.Context;
+using Lab6.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lab6.Repositories;
 
 public static class AlarmRepository
 {
-    public static List<AlarmRecord> AlarmList { get; } = [];
-    private static string _jsonPath;
+    private static ApplicationDbContext _dbContext;
+    
+    public static DbSet<Alarm> AlarmSet { get; }
 
     static AlarmRepository()
     {
-        var executableFolder = Path.GetDirectoryName(Environment.ProcessPath!);
-        _jsonPath = Json.GetFilePath(executableFolder!, "UserAlarms");
-        
-        if (!File.Exists(_jsonPath))
-        {
-            InitializeJson();
-        }
-        
-        AlarmList = Json.CustomDeserialize<List<AlarmRecord>>(_jsonPath);
+        _dbContext = new ApplicationDbContext();
+        AlarmSet = _dbContext.Alarms;
+            
         CheckAlarmRelevance();
     }
     
-    private static void InitializeJson()
+    private static async void SaveChanges()
     {
-        using (File.Create(_jsonPath)) {}
-            
-        Json.CustomSerialize(_jsonPath, AlarmList);
-    }
-
-    public static void UpdateJson()
-    {
-        Json.CustomSerialize(_jsonPath, AlarmList);
-    }
+        await _dbContext.SaveChangesAsync();
+    } 
 
     public static void CheckAlarmRelevance()
     {
         var forDeletion = new List<Guid>();
 
-        foreach (var record in AlarmList)
+        foreach (var record in AlarmSet)
         {
-            if (record.DateTime.CompareTo(DateTime.Now) <= 0)
-                forDeletion.Add(record.Id);
+            if (record.Datetime.CompareTo(DateTime.Now) <= 0)
+                forDeletion.Add(new Guid(record.Id));
         }
 
-        bool areThereDeprecatedAlarms = AlarmList.Count != 0;
+        bool areThereDeprecatedAlarms = forDeletion.Count != 0;
+        
+        if (!areThereDeprecatedAlarms) return;
         
         foreach (var id in forDeletion)
         {
             RemoveRecord(id);
         }
         
-        if (areThereDeprecatedAlarms) UpdateJson();
+        SaveChanges();
     }
 
-    public static AlarmRecord AddRecord(string title, DateTime dateTime)
+    public static Alarm AddRecord(string title, DateTime dateTime)
     {
-        var alarm = new AlarmRecord(title, dateTime); 
+        var alarm = new Alarm(title, dateTime); 
         
-        AlarmList.Add(alarm);
+        AlarmSet.Add(alarm);
         
-        UpdateJson();
+        SaveChanges();
         
         return alarm;
     }
 
-    public static AlarmRecord EditRecord(Guid recordId, string title, DateTime dateTime, bool isAlarmEnabled)
+    public static Alarm EditRecord(Guid recordId, string title, DateTime dateTime, bool isAlarmEnabled)
     {
         var record = GetRecord(recordId);
         record.Title = title;
-        record.DateTime = dateTime;
+        record.Datetime = dateTime;
         record.IsAlarmEnabled = isAlarmEnabled;
         
-        UpdateJson();
+        SaveChanges();
 
         return record;
     }
 
-    public static AlarmRecord GetRecord(Guid id)
+    public static Alarm GetRecord(Guid id)
     {
-        var alarm = AlarmList.Find(x => x.Id == id);
+        var alarm = AlarmSet.Find(id.ToByteArray());
 
-        if (alarm is null) 
-            throw new ArgumentException("Alarm with this record is not exist");
+        if (alarm is null)
+            throw new ArgumentException("There's no alarms with that GUID");
         
         return alarm;
     }
 
-    public static AlarmRecord RemoveRecord(Guid id)
+    public static Alarm RemoveRecord(Guid id)
     {
-        var alarm = AlarmList.Find(x => x.Id == id);
-
-        if (alarm is null) 
-            throw new ArgumentException("Alarm with this record is not exist");
+        var alarm = GetRecord(id);
         
-        AlarmList.Remove(alarm);
+        AlarmSet.Remove(alarm);
         
-        UpdateJson();
+        SaveChanges();
         
         return alarm;
     }

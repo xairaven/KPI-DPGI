@@ -1,19 +1,17 @@
-﻿using System.Globalization;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using Lab6.Model;
+using Lab6.Entities;
 using Lab6.Repositories;
-using Lab6.Views.Controls;
+using Lab6.Utils;
 
 namespace Lab6.Views;
 
 public partial class EditAlarmWindow : Window
 {
-    private AlarmRecord _record;
+    private Alarm _record;
     private Panel _stackPanel;
 
-    public EditAlarmWindow(Panel stackPanel, AlarmRecord record)
+    public EditAlarmWindow(Panel stackPanel, Alarm record)
     {
         InitializeComponent();
 
@@ -48,9 +46,9 @@ public partial class EditAlarmWindow : Window
 
         var resultDatetime = date.Date.Add(time);
         
-        AlarmRepository.EditRecord(_record.Id, title, resultDatetime, _record.IsAlarmEnabled);
+        AlarmRepository.EditRecord(new Guid(_record.Id), title, resultDatetime, _record.IsAlarmEnabled);
         
-        UpdateList();
+        Panels.UpdateList(_stackPanel);
 
         Close();
     }
@@ -67,29 +65,5 @@ public partial class EditAlarmWindow : Window
         // Compare TimePicker and Datetime.now.
         // If TimePicker is later (> 0) than DateTime.now, its real alarm
         return time.CompareTo(DateTime.Now.TimeOfDay) > 0;
-    }
-
-    private void UpdateList()
-    {
-        AlarmRepository.CheckAlarmRelevance();
-        
-        _stackPanel.Children.Clear();
-        foreach (var record in AlarmRepository.AlarmList)
-        {
-            var element = new AlarmElement();
-
-            element.Id = record.Id;
-            element.Title = record.Title;
-            
-            var datetime = record.DateTime;
-            element.Time = $"{datetime.Hour:00}:{datetime.Minute:00}";
-            
-            var monthName = datetime.ToString("MMM", CultureInfo.InvariantCulture);
-            element.Date = $"{datetime.DayOfWeek.ToString()[..3]}, {datetime.Day:00} {monthName}";
-            
-            element.IsAlarmEnabled = record.IsAlarmEnabled;
-            
-            _stackPanel.Children.Add(element);
-        }
     }
 }

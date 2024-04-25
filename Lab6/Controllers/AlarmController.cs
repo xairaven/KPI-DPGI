@@ -24,16 +24,17 @@ public class AlarmController
 
     private void CheckAlarms(object? sender, EventArgs e)
     {
-        foreach (var record in AlarmRepository.AlarmList)
+        foreach (var record in AlarmRepository.AlarmSet)
         {
             if (!record.IsAlarmEnabled) continue;
             
             var truncatedNow = Truncate(DateTime.Now, TimeSpan.FromMinutes(1));
-            var truncatedAlarmTime = Truncate(record.DateTime, TimeSpan.FromMinutes(1));
+            var truncatedAlarmTime = Truncate(record.Datetime, TimeSpan.FromMinutes(1));
 
             if (truncatedNow.CompareTo(truncatedAlarmTime) != 0) continue;
             
-            AlarmRepository.EditRecord(record.Id, record.Title, record.DateTime, !record.IsAlarmEnabled);
+            AlarmRepository.EditRecord(new Guid(record.Id), 
+                record.Title, record.Datetime, !record.IsAlarmEnabled);
             new AlarmNotification(_context, record).Show();
         }
     }
