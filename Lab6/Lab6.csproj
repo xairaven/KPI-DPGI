@@ -84,6 +84,10 @@
         <Content Include="Assets\Icons\Stop.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <None Remove="Database\Alarms.db" />
+        <Resource Include="Database\Alarms.db">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
     </ItemGroup>
 
     <ItemGroup>
@@ -109,9 +113,5 @@
         <PackageReference Include="Syncfusion.Licensing" Version="25.1.35" />
         <PackageReference Include="Syncfusion.SfInput.WPF" Version="25.1.35" />
         <PackageReference Include="Syncfusion.Shared.WPF" Version="25.1.35" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Database\" />
     </ItemGroup>
 </Project>
