@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Lab6.Data;
 using Lab6.Model;
 using Lab6.Repositories;
 using Lab6.Views.Controls;

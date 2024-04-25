@@ -110,4 +110,8 @@
         <PackageReference Include="Syncfusion.SfInput.WPF" Version="25.1.35" />
         <PackageReference Include="Syncfusion.Shared.WPF" Version="25.1.35" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Database\" />
+    </ItemGroup>
 </Project>

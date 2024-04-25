@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
-using Lab6;
-using Lab6.Data;
+using Lab6.Enums;
 
 namespace Lab6.Views;
 

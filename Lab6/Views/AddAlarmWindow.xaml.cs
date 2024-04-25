@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Windows;
-using Lab6.Data;
 using Lab6.Views.Controls;
 using Lab6.Repositories;
 

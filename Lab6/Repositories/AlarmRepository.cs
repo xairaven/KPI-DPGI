@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Lab6.Data;
 using Lab6.Model;
 using Lab6.Serializing;
 

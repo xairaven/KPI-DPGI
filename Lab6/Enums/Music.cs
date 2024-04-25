@@ -1,4 +1,4 @@
-﻿namespace Lab6.Data;
+﻿namespace Lab6.Enums;
 
 public enum Music
 {
