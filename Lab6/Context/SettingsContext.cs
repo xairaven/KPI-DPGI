@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Lab6.Serializing;
 
-namespace Lab6;
+namespace Lab6.Context;
 
 public class SettingsContext
 {

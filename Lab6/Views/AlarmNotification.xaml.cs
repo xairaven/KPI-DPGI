@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using Lab6;
+using Lab6.Context;
 using Lab6.Enums;
 using Lab6.Model;
 
