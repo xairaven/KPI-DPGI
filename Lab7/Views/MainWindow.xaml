@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab7.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Lab 7 | Library" Height="450" Width="800">
+        Title="Lab 7 | Library" Height="550" Width="800">
     <Grid>
         <Frame Name="MainFrame" Margin="3" NavigationUIVisibility="Visible"/>
     </Grid>

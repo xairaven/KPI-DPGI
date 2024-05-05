@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Lab7.Context;
 using Lab7.Views.Pages;
 
 namespace Lab7.Views;
@@ -23,7 +24,9 @@ public partial class MainWindow : Window
 
     private void CreatePages()
     {
-        _pages["MainPage"] = new MainPage(MainFrame, _pages);
+        using var dbContext = new LibraryDbContext();
+        
+        _pages["MainPage"] = new MainPage(MainFrame, _pages, dbContext);
         _pages["BooksPage"] = new BooksPage();
         _pages["PublishersPage"] = new PublishersPage();
     }

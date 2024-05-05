@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Lab7.Context;
 
 namespace Lab7.Views.Pages;
 
@@ -9,12 +10,31 @@ public partial class MainPage : Page
     private readonly Frame _frame;
     private readonly Dictionary<string, Page> _pages;
 
-    public MainPage(Frame frame, Dictionary<string, Page> pages)
+    public MainPage(Frame frame, Dictionary<string, Page> pages, LibraryDbContext dbContext)
     {
         InitializeComponent();
 
         _frame = frame;
         _pages = pages;
+        
+        InitializeJoinedTable(dbContext);
+    }
+    
+    private void InitializeJoinedTable(LibraryDbContext dbContext)
+    {
+        var joined = dbContext.Books.Join(dbContext.Publishers,
+            x => x.PublisherCode,
+            y => y.Id,
+            (x, y) => new
+            {
+                x.Isbn,
+                x.Title,
+                x.Authors,
+                Publisher = y.Name,
+                x.PublicationYear
+            });
+
+        JoinedGrid.DataContext = joined.ToList();
     }
 
     private void UndoButton_OnClick(object sender, RoutedEventArgs e)

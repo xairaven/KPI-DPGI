@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Lab7.Views.Pages"
       mc:Ignorable="d"
-      Title="MainPage" Height="450" Width="800">
+      Title="MainPage" Height="550" MaxHeight="550" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -88,5 +88,10 @@
                 <Separator />
             </ToolBar>
         </StackPanel>
+        
+        <DataGrid Grid.Row="1" x:Name="JoinedGrid"
+                  AutoGenerateColumns="True"
+                  ItemsSource="{Binding}">
+        </DataGrid>
     </Grid>
 </Page>
