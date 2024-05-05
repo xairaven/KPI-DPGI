@@ -9,7 +9,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="64px" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
@@ -57,17 +56,37 @@
                 <Button Name="DeleteButton" ToolTip="Delete" Click="DeleteButton_OnClick" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/DeleteIcon.png" />
                 </Button>
+                
+                <Separator />
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                           VerticalAlignment="Center" Content="Hyperlinks:" />
+                    
+                    <Button Grid.Row="1" Grid.Column="0" 
+                        ToolTip="Navigate to Books.." Click="HyperlinkBooks_OnClick" Margin="5"
+                        Background="Transparent" BorderThickness="0">
+                        <Image Width="20" Height="20" Source="../../Resources/Icons/BooksIcon.png" />
+                    </Button>
+                    
+                    <Button Grid.Row="1" Grid.Column="1" 
+                            ToolTip="Navigate to Publishers.." Click="HyperlinkPublishers_OnClick" Margin="5"
+                            Background="Transparent" BorderThickness="0">
+                        <Image Width="20" Height="20" Source="../../Resources/Icons/PublishersIcon.png" />
+                    </Button>
+                </Grid>
+                
+                <Separator />
             </ToolBar>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Label VerticalAlignment="Center" Content="Hyperlinks:" />
-            <TextBlock VerticalAlignment="Center" Margin="5">
-                <Hyperlink NavigateUri="BooksPage.xaml">Books</Hyperlink>
-            </TextBlock>
-            <TextBlock VerticalAlignment="Center" Margin="5">
-                <Hyperlink NavigateUri="PublishersPage.xaml">Publishers</Hyperlink>
-            </TextBlock>
         </StackPanel>
     </Grid>
 </Page>
