@@ -9,9 +9,32 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32px" />
+            <RowDefinition Height="32px" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        
+        <StackPanel Grid.Row="0">
+            <Menu>
+                <MenuItem Header="Action" >
+                    <MenuItem Header="Redo" />
+                    
+                    <Separator /> 
+                    
+                    <MenuItem Header="Create" />
+                    <MenuItem Header="Edit" />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Find" />
+                    
+                    <Separator /> 
+                    
+                    <MenuItem Header="Delete" />
+                </MenuItem>
+                
+                <MenuItem Header="Report" />
+            </Menu>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label VerticalAlignment="Center" Content="Hyperlinks:" />
             <TextBlock VerticalAlignment="Center" Margin="5">
                 <Hyperlink NavigateUri="BooksPage.xaml">Books</Hyperlink>
