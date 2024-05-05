@@ -2,9 +2,9 @@
 
 namespace Lab7.Views.Pages;
 
-public partial class PageMain : Page
+public partial class BooksPage : Page
 {
-    public PageMain()
+    public BooksPage()
     {
         InitializeComponent();
     }

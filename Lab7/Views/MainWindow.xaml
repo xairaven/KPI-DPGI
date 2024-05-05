@@ -7,6 +7,6 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Lab 7 | Library" Height="450" Width="800">
     <Grid>
-        <Frame Name="MainFrame" Margin="3" Source="Pages/PageMain.xaml" NavigationUIVisibility="Visible"/>
+        <Frame Name="MainFrame" Margin="3" Source="Pages/MainPage.xaml" NavigationUIVisibility="Visible"/>
     </Grid>
 </Window>
