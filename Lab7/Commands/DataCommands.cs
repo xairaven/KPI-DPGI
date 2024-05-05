@@ -2,7 +2,7 @@
 
 namespace Lab7.Commands;
 
-public class DataCommands
+public static class DataCommands
 {
     public static RoutedCommand Undo { get; }
     public static RoutedCommand Create { get; }

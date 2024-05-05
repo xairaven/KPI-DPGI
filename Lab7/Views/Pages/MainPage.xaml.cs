@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
+using System.Windows.Input;
 using Lab7.Context;
 
 namespace Lab7.Views.Pages;
@@ -36,36 +36,49 @@ public partial class MainPage : Page
 
         JoinedGrid.DataContext = joined.ToList();
     }
-
-    private void UndoButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
+    
+    private void UndoCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
     }
-
-    private void CreateButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void EditButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void SaveButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void FindButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
+    private void UndoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
     }
     
-    private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
+    private void CreateCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
     }
+    private void CreateCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
+    }
+    
+    private void EditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
+    }
+    private void EditCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
+    }
+    
+    private void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
+    }
+    private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
+    }
+    
+    private void FindCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
+    }
+    private void FindCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
+    }
+    
+    private void DeleteCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        e.CanExecute = true;
+    }
+    private void DeleteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        
+    }
+    
 
     private void HyperlinkBooks_OnClick(object sender, RoutedEventArgs e)
     {

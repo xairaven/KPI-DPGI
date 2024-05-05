@@ -4,8 +4,30 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Lab7.Views.Pages"
+      xmlns:commands="clr-namespace:Lab7.Commands"
       mc:Ignorable="d"
       Title="MainPage" Height="550" MaxHeight="550" Width="800">
+    <Page.CommandBindings>
+        <CommandBinding Command="Undo"
+                        Executed="UndoCommandBinding_Executed"
+                        CanExecute="UndoCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static commands:DataCommands.Create}"
+                        Executed="CreateCommandBinding_Executed"
+                        CanExecute="CreateCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static commands:DataCommands.Edit}"
+                        Executed="EditCommandBinding_Executed"
+                        CanExecute="EditCommandBinding_CanExecute"/>
+        <CommandBinding Command="Save"
+                        Executed="SaveCommandBinding_Executed"
+                        CanExecute="SaveCommandBinding_CanExecute"/>
+        <CommandBinding Command="Find"
+                        Executed="FindCommandBinding_Executed"
+                        CanExecute="FindCommandBinding_CanExecute"/>
+        <CommandBinding Command="Delete"
+                        Executed="DeleteCommandBinding_Executed"
+                        CanExecute="DeleteCommandBinding_CanExecute"/>
+    </Page.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,27 +55,32 @@
             </Menu>
             
             <ToolBar>
-                <Button Name="UndoButton" ToolTip="Undo" Click="UndoButton_OnClick" Margin="5">
+                <Button Name="UndoButton" Command="Undo" ToolTip="Undo" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/UndoIcon.png" />
                 </Button>
                 
-                <Button Name="CreateButton" ToolTip="Create" Click="CreateButton_OnClick" Margin="5">
+                <Button Name="CreateButton" Command="{x:Static commands:DataCommands.Create}" 
+                        ToolTip="Create" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/CreateIcon.png" />
                 </Button>
                 
-                <Button Name="EditButton" ToolTip="Edit" Click="EditButton_OnClick" Margin="5">
+                <Button Name="EditButton" Command="{x:Static commands:DataCommands.Edit}"
+                        ToolTip="Edit" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/EditIcon.png" />
                 </Button>
                 
-                <Button Name="SaveButton" ToolTip="Save" Click="SaveButton_OnClick" Margin="5">
+                <Button Name="SaveButton" Command="Save"
+                        ToolTip="Save" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/SaveIcon.png" />
                 </Button>
                 
-                <Button Name="FindButton" ToolTip="Find" Click="FindButton_OnClick" Margin="5">
+                <Button Name="FindButton" Command="Find"
+                        ToolTip="Find" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/FindIcon.png" />
                 </Button>
                 
-                <Button Name="DeleteButton" ToolTip="Delete" Click="DeleteButton_OnClick" Margin="5">
+                <Button Name="DeleteButton" Command="Delete"
+                        ToolTip="Delete" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/DeleteIcon.png" />
                 </Button>
                 
