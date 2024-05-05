@@ -8,15 +8,15 @@
       Title="MainPage" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32px" />
-            <RowDefinition Height="32px" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="64px" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0">
             <Menu>
                 <MenuItem Header="Action" >
-                    <MenuItem Header="Redo" />
+                    <MenuItem Header="Undo" />
                     
                     <Separator /> 
                     
@@ -32,6 +32,32 @@
                 
                 <MenuItem Header="Report" />
             </Menu>
+            
+            <ToolBar>
+                <Button Name="UndoButton" ToolTip="Undo" Click="UndoButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/UndoIcon.png" />
+                </Button>
+                
+                <Button Name="CreateButton" ToolTip="Create" Click="CreateButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/CreateIcon.png" />
+                </Button>
+                
+                <Button Name="EditButton" ToolTip="Edit" Click="EditButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/EditIcon.png" />
+                </Button>
+                
+                <Button Name="SaveButton" ToolTip="Save" Click="SaveButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/SaveIcon.png" />
+                </Button>
+                
+                <Button Name="FindButton" ToolTip="Find" Click="FindButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/FindIcon.png" />
+                </Button>
+                
+                <Button Name="DeleteButton" ToolTip="Delete" Click="DeleteButton_OnClick" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/DeleteIcon.png" />
+                </Button>
+            </ToolBar>
         </StackPanel>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal">
