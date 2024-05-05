@@ -7,6 +7,16 @@
       mc:Ignorable="d"
       Title="BooksPage" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="BooksGrid"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ISBN" Binding="{Binding Isbn}" />
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Authors" Binding="{Binding Authors}" />
+                <DataGridTextColumn Header="Publisher Code" Binding="{Binding PublisherCode}" />
+                <DataGridTextColumn Header="Publication Year" Binding="{Binding PublicationYear}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

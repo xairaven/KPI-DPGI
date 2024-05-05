@@ -7,6 +7,13 @@
       mc:Ignorable="d"
       Title="PublishersPage" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="PublishersGrid"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

@@ -27,7 +27,7 @@ public partial class MainWindow : Window
         using var dbContext = new LibraryDbContext();
         
         _pages["MainPage"] = new MainPage(MainFrame, _pages, dbContext);
-        _pages["BooksPage"] = new BooksPage();
-        _pages["PublishersPage"] = new PublishersPage();
+        _pages["BooksPage"] = new BooksPage(dbContext);
+        _pages["PublishersPage"] = new PublishersPage(dbContext);
     }
 }
