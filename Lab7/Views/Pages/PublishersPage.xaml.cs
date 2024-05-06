@@ -8,13 +8,13 @@ public partial class PublishersPage : Page
     public PublishersPage()
     {
         InitializeComponent();
-
-        using var dbContext = new LibraryDbContext();
-        ReloadGrid(dbContext);
+        
+        ReloadGrid();
     }
 
-    public void ReloadGrid(LibraryDbContext dbContext)
+    public void ReloadGrid()
     {
+        using var dbContext = new LibraryDbContext();
         PublishersGrid.DataContext = dbContext.Publishers.ToList();
     }
 }

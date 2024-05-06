@@ -9,12 +9,12 @@ public partial class BooksPage : Page
     {
         InitializeComponent();
         
-        using var dbContext = new LibraryDbContext();
-        ReloadGrid(dbContext);
+        ReloadGrid();
     }
 
-    public void ReloadGrid(LibraryDbContext dbContext)
+    public void ReloadGrid()
     {
+        using var dbContext = new LibraryDbContext();
         BooksGrid.DataContext = dbContext.Books.ToList();
     }
 }
