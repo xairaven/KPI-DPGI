@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Lab7.Context;
+using Lab7.Repositories;
 using Lab7.Views.Forms;
 
 namespace Lab7.Views.Pages;
@@ -107,7 +108,36 @@ public partial class MainPage : Page, IDisposable
         e.CanExecute = true;
     }
     private void DeleteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+        var item = JoinedGrid.SelectedItem;
         
+        if (item is null)
+        {
+            MessageBox.Show(messageBoxText: "Choose some row if you want to edit it!",
+                caption: "Error",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+
+            return;
+        }
+
+        dynamic dynamicItem = item;
+        var isbn = (string)dynamicItem.Isbn;
+
+        try
+        {
+            new BooksRepository(_dbContext).Delete(isbn);
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(messageBoxText: exception.Message,
+                caption: "Error",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+        }
+        
+        ReloadCommandBinding_Executed(null!, null!);
     }
     
 
