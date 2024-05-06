@@ -40,18 +40,18 @@
         <StackPanel Grid.Row="0">
             <Menu>
                 <MenuItem Header="Action" >
-                    <MenuItem Header="Undo" />
+                    <MenuItem Header="Undo" Command="{x:Static commands:DataCommands.Undo}"/>
                     
                     <Separator /> 
                     
-                    <MenuItem Header="Create" />
-                    <MenuItem Header="Edit" />
-                    <MenuItem Header="Save" />
-                    <MenuItem Header="Find" />
+                    <MenuItem Header="Create" Command="{x:Static commands:DataCommands.Create}" />
+                    <MenuItem Header="Edit" Command="{x:Static commands:DataCommands.Edit}" />
+                    <MenuItem Header="Save" Command="{x:Static commands:DataCommands.Save}" />
+                    <MenuItem Header="Find" Command="{x:Static commands:DataCommands.Find}" />
                     
                     <Separator /> 
                     
-                    <MenuItem Header="Delete" />
+                    <MenuItem Header="Delete" Command="{x:Static commands:DataCommands.Delete}" />
                 </MenuItem>
                 
                 <MenuItem Header="Report" />
