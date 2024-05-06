@@ -83,8 +83,14 @@ public partial class MainPage : Page, IDisposable
     private void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
         e.CanExecute = true;
     }
-    private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
-        
+    private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        _dbContext.SaveChanges();
+        MessageBox.Show(messageBoxText: "Changes saved in database",
+            caption: "Success!",
+            button: MessageBoxButton.OK,
+            icon: MessageBoxImage.Information,
+            defaultResult: MessageBoxResult.OK);
     }
     
     private void FindCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
