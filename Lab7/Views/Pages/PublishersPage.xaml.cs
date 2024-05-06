@@ -5,10 +5,11 @@ namespace Lab7.Views.Pages;
 
 public partial class PublishersPage : Page
 {
-    public PublishersPage(LibraryDbContext dbContext)
+    public PublishersPage()
     {
         InitializeComponent();
-        
+
+        using var dbContext = new LibraryDbContext();
         PublishersGrid.DataContext = dbContext.Publishers.ToList();
     }
 }

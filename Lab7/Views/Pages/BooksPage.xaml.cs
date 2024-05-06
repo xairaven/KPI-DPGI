@@ -5,10 +5,11 @@ namespace Lab7.Views.Pages;
 
 public partial class BooksPage : Page
 {
-    public BooksPage(LibraryDbContext dbContext)
+    public BooksPage()
     {
         InitializeComponent();
         
+        using var dbContext = new LibraryDbContext();
         BooksGrid.DataContext = dbContext.Books.ToList();
     }
 }

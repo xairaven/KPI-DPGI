@@ -24,10 +24,8 @@ public partial class MainWindow : Window
 
     private void CreatePages()
     {
-        using var dbContext = new LibraryDbContext();
-        
-        _pages["MainPage"] = new MainPage(MainFrame, _pages, dbContext);
-        _pages["BooksPage"] = new BooksPage(dbContext);
-        _pages["PublishersPage"] = new PublishersPage(dbContext);
+        _pages["MainPage"] = new MainPage(MainFrame, _pages);
+        _pages["BooksPage"] = new BooksPage();
+        _pages["PublishersPage"] = new PublishersPage();
     }
 }

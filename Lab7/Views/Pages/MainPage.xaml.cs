@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Lab7.Context;
+using Lab7.Views.Forms;
 
 namespace Lab7.Views.Pages;
 
@@ -9,20 +10,22 @@ public partial class MainPage : Page
 {
     private readonly Frame _frame;
     private readonly Dictionary<string, Page> _pages;
+    private readonly LibraryDbContext _dbContext;
 
-    public MainPage(Frame frame, Dictionary<string, Page> pages, LibraryDbContext dbContext)
+    public MainPage(Frame frame, Dictionary<string, Page> pages)
     {
         InitializeComponent();
 
         _frame = frame;
         _pages = pages;
+        _dbContext = new LibraryDbContext();
         
-        InitializeJoinedTable(dbContext);
+        InitializeJoinedTable();
     }
     
-    private void InitializeJoinedTable(LibraryDbContext dbContext)
+    private void InitializeJoinedTable()
     {
-        var joined = dbContext.Books.Join(dbContext.Publishers,
+        var joined = _dbContext.Books.Join(_dbContext.Publishers,
             x => x.PublisherCode,
             y => y.Id,
             (x, y) => new
@@ -48,7 +51,7 @@ public partial class MainPage : Page
         e.CanExecute = true;
     }
     private void CreateCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
-        
+        new CreateForm(_dbContext).Show();
     }
     
     private void EditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
