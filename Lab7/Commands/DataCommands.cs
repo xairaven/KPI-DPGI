@@ -11,6 +11,7 @@ public static class DataCommands
     public static RoutedCommand Find { get; }
     public static RoutedCommand Reload { get; }
     public static RoutedCommand Delete { get; }
+    public static RoutedCommand Report { get; }
     
     static DataCommands() {
         Undo = new RoutedCommand("Delete", typeof(DataCommands),
@@ -33,5 +34,8 @@ public static class DataCommands
         
         Delete = new RoutedCommand("Delete", typeof(DataCommands),
             [new KeyGesture(Key.D, ModifierKeys.Control, "Ctrl+D")]);
+        
+        Report = new RoutedCommand("Report", typeof(DataCommands),
+            [new KeyGesture(Key.P, ModifierKeys.Control, "Ctrl+P")]);
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Lab7.Context;
 using Lab7.Repositories;
+using Lab7.Services;
 using Lab7.Views.Forms;
 
 namespace Lab7.Views.Pages;
@@ -149,6 +150,25 @@ public partial class MainPage : Page, IDisposable
         }
         
         ReloadCommandBinding_Executed(null!, null!);
+    }
+    
+    private void ReportCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+    private void ReportCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        const string filename = "report.txt";
+        
+        var reportService = new ReportService(filename);
+        var text = reportService.ToCsvString(JoinedGrid);
+        reportService.ToTextFile(text);
+        
+        MessageBox.Show(messageBoxText: $"Data written to file {filename}!",
+            caption: "Success | Report",
+            button: MessageBoxButton.OK,
+            icon: MessageBoxImage.Information,
+            defaultResult: MessageBoxResult.OK);
     }
     
 

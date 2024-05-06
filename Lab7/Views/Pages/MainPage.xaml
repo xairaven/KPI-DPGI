@@ -29,6 +29,10 @@
         <CommandBinding Command="{x:Static commands:DataCommands.Delete}"
                         Executed="DeleteCommandBinding_Executed"
                         CanExecute="DeleteCommandBinding_CanExecute"/>
+        
+        <CommandBinding Command="{x:Static commands:DataCommands.Report}"
+                        Executed="ReportCommandBinding_Executed"
+                        CanExecute="ReportCommandBinding_CanExecute"/>
     </Page.CommandBindings>
     
     <Grid>
@@ -54,7 +58,7 @@
                     <MenuItem Header="Delete" Command="{x:Static commands:DataCommands.Delete}" />
                 </MenuItem>
                 
-                <MenuItem Header="Report" />
+                <MenuItem Header="Report" Command="{x:Static commands:DataCommands.Report}"/>
             </Menu>
             
             <ToolBar>
