@@ -10,6 +10,11 @@ public partial class BooksPage : Page
         InitializeComponent();
         
         using var dbContext = new LibraryDbContext();
+        ReloadGrid(dbContext);
+    }
+
+    public void ReloadGrid(LibraryDbContext dbContext)
+    {
         BooksGrid.DataContext = dbContext.Books.ToList();
     }
 }

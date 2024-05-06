@@ -10,6 +10,11 @@ public partial class PublishersPage : Page
         InitializeComponent();
 
         using var dbContext = new LibraryDbContext();
+        ReloadGrid(dbContext);
+    }
+
+    public void ReloadGrid(LibraryDbContext dbContext)
+    {
         PublishersGrid.DataContext = dbContext.Publishers.ToList();
     }
 }

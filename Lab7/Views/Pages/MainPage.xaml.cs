@@ -96,11 +96,17 @@ public partial class MainPage : Page, IDisposable
     private void HyperlinkBooks_OnClick(object sender, RoutedEventArgs e)
     {
         _frame.Navigate(_pages["BooksPage"]);
+        
+        var page = (BooksPage) _pages["BooksPage"];
+        page.ReloadGrid(_dbContext);
     }
 
     private void HyperlinkPublishers_OnClick(object sender, RoutedEventArgs e)
     {
         _frame.Navigate(_pages["PublishersPage"]);
+        
+        var page = (PublishersPage) _pages["PublishersPage"];
+        page.ReloadGrid(_dbContext);
     }
 
     public void Dispose()
