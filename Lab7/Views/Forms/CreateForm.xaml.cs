@@ -1,13 +1,13 @@
 ﻿using System.Windows;
 using Lab7.Context;
-using Lab7.Entities;
+using Lab7.Repositories;
 using Lab7.Utils;
 
 namespace Lab7.Views.Forms;
 
 public partial class CreateForm : Window
 {
-    private LibraryDbContext _dbContext;
+    private readonly LibraryDbContext _dbContext;
 
     public CreateForm(LibraryDbContext dbContext)
     {
@@ -20,39 +20,26 @@ public partial class CreateForm : Window
     {
         if (!IsValidationPassed()) return;
 
-        var publisherFromForm = PubBox.Text.Trim();
-
-        var publishers = _dbContext.Publishers;
-        
-        var publisher = publishers.FirstOrDefault(p => p.Name.Equals(publisherFromForm));
-        if (publisher is null)
+        try
         {
-            _dbContext.Add(new Publisher
-            {
-                Name = publisherFromForm
-            });
-            
-            _dbContext.SaveChanges();
-            
-            publisher = publishers.FirstOrDefault(p => p.Name.Equals(publisherFromForm));
+            new BooksRepository(_dbContext).Create(
+                ISBNBox.Text.Trim(),
+                TitleBox.Text.Trim(),
+                AuthorsBox.Text.Trim(),
+                PubBox.Text.Trim(),
+                PubYearBox.Text.Trim()
+            );
         }
-
-        var publisherId = publisher!.Id;
-        var publicationYear = short.Parse(PubYearBox.Text.Trim());
-
-        _dbContext.Add(new Book
+        catch (Exception exception)
         {
-            Isbn = ISBNBox.Text.Trim(),
-            Title = TitleBox.Text.Trim(),
-            Authors = AuthorsBox.Text.Trim(),
-            PublisherCode = publisherId,
-            PublicationYear = publicationYear
-        });
+            MessageBox.Show(messageBoxText: exception.Message,
+                caption: "Error!",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+            return;
+        }
         
-        _dbContext.SaveChanges();
-        
-        // Load window
-
         MessageBox.Show(messageBoxText: "Success! Entry added.",
             caption: "Entry added.",
             button: MessageBoxButton.OK,
@@ -69,19 +56,11 @@ public partial class CreateForm : Window
 
     private bool IsValidationPassed()
     {
-        var isIsbnExist = ValidateFields.IsbnExists(_dbContext, ISBNBox.Text.Trim());
-
-        return !IsThereEmptyField() &&
-               !isIsbnExist &&
+        return !ValidateFields.IsEmpty(ISBNBox.Text) &&
+               !ValidateFields.IsEmpty(TitleBox.Text) &&
+               !ValidateFields.IsEmpty(AuthorsBox.Text) &&
+               !ValidateFields.IsEmpty(PubBox.Text) &&
+               !ValidateFields.IsEmpty(PubYearBox.Text) &&
                ValidateFields.CanCastYear(PubYearBox.Text.Trim());
-    }
-
-    private bool IsThereEmptyField()
-    {
-        return ValidateFields.IsEmpty(ISBNBox.Text) ||
-               ValidateFields.IsEmpty(TitleBox.Text) ||
-               ValidateFields.IsEmpty(AuthorsBox.Text) ||
-               ValidateFields.IsEmpty(PubBox.Text) ||
-               ValidateFields.IsEmpty(PubYearBox.Text);
     }
 }
