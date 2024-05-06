@@ -54,11 +54,29 @@ public partial class MainPage : Page, IDisposable
         new CreateForm(_dbContext).Show();
     }
     
-    private void EditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+    private void EditCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
         e.CanExecute = true;
     }
-    private void EditCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
+    private void EditCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        var item = JoinedGrid.SelectedItem;
         
+        if (item is null)
+        {
+            MessageBox.Show(messageBoxText: "Choose some row if you want to edit it!",
+                caption: "Error",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error,
+                defaultResult: MessageBoxResult.OK);
+
+            return;
+        }
+
+        dynamic dynamicItem = item;
+        var isbn = (string)dynamicItem.Isbn;
+        
+        new EditForm(_dbContext, isbn).Show();
     }
     
     private void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
