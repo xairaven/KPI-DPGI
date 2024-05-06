@@ -34,7 +34,7 @@ public class BooksRepository
             var publisherRepo = new PublishersRepository(_dbContext);
             publisherRepo.Create(publishers);
             
-            publisher = publishersSet.FirstOrDefault(p => p.Name.Equals(publisher));
+            publisher = publishersSet.FirstOrDefault(p => p.Name.Equals(publishers));
             created = publisher;
         }
 
