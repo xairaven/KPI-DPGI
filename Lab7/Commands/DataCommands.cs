@@ -9,6 +9,7 @@ public static class DataCommands
     public static RoutedCommand Edit { get; }
     public static RoutedCommand Save { get; }
     public static RoutedCommand Find { get; }
+    public static RoutedCommand Reload { get; }
     public static RoutedCommand Delete { get; }
     
     static DataCommands() {
@@ -26,6 +27,9 @@ public static class DataCommands
         
         Find = new RoutedCommand("Find", typeof(DataCommands),
             [new KeyGesture(Key.F, ModifierKeys.Control, "Ctrl+F")]);
+        
+        Reload = new RoutedCommand("Reload", typeof(DataCommands),
+            [new KeyGesture(Key.R, ModifierKeys.Control, "Ctrl+R")]);
         
         Delete = new RoutedCommand("Delete", typeof(DataCommands),
             [new KeyGesture(Key.D, ModifierKeys.Control, "Ctrl+D")]);

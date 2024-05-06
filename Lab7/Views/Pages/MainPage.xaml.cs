@@ -6,7 +6,7 @@ using Lab7.Views.Forms;
 
 namespace Lab7.Views.Pages;
 
-public partial class MainPage : Page
+public partial class MainPage : Page, IDisposable
 {
     private readonly Frame _frame;
     private readonly Dictionary<string, Page> _pages;
@@ -75,6 +75,16 @@ public partial class MainPage : Page
         
     }
     
+    private void ReloadCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+    private void ReloadCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        InitializeJoinedTable();
+    }
+    
+    
     private void DeleteCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
         e.CanExecute = true;
     }
@@ -91,5 +101,10 @@ public partial class MainPage : Page
     private void HyperlinkPublishers_OnClick(object sender, RoutedEventArgs e)
     {
         _frame.Navigate(_pages["PublishersPage"]);
+    }
+
+    public void Dispose()
+    {
+        _dbContext.Dispose();
     }
 }

@@ -23,6 +23,9 @@
         <CommandBinding Command="Find"
                         Executed="FindCommandBinding_Executed"
                         CanExecute="FindCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static commands:DataCommands.Reload}"
+                        Executed="ReloadCommandBinding_Executed"
+                        CanExecute="ReloadCommandBinding_CanExecute"/>
         <CommandBinding Command="Delete"
                         Executed="DeleteCommandBinding_Executed"
                         CanExecute="DeleteCommandBinding_CanExecute"/>
@@ -55,32 +58,31 @@
             </Menu>
             
             <ToolBar>
-                <Button Name="UndoButton" Command="Undo" ToolTip="Undo" Margin="5">
+                <Button Command="Undo" ToolTip="Undo" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/UndoIcon.png" />
                 </Button>
                 
-                <Button Name="CreateButton" Command="{x:Static commands:DataCommands.Create}" 
-                        ToolTip="Create" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Create}"  ToolTip="Create" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/CreateIcon.png" />
                 </Button>
                 
-                <Button Name="EditButton" Command="{x:Static commands:DataCommands.Edit}"
-                        ToolTip="Edit" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Edit}" ToolTip="Edit" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/EditIcon.png" />
                 </Button>
                 
-                <Button Name="SaveButton" Command="Save"
-                        ToolTip="Save" Margin="5">
+                <Button Command="Save" ToolTip="Save" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/SaveIcon.png" />
                 </Button>
                 
-                <Button Name="FindButton" Command="Find"
-                        ToolTip="Find" Margin="5">
+                <Button Command="Find" ToolTip="Find" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/FindIcon.png" />
                 </Button>
                 
-                <Button Name="DeleteButton" Command="Delete"
-                        ToolTip="Delete" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Reload}" ToolTip="Reload" Margin="5">
+                    <Image Width="32" Height="32" Source="../../Resources/Icons/ReloadIcon.png" />
+                </Button>
+                
+                <Button Command="Delete" ToolTip="Delete" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/DeleteIcon.png" />
                 </Button>
                 
