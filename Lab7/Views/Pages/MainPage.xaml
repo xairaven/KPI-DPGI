@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       Title="MainPage" Height="550" MaxHeight="550" Width="800">
     <Page.CommandBindings>
-        <CommandBinding Command="Undo"
+        <CommandBinding Command="{x:Static commands:DataCommands.Undo}"
                         Executed="UndoCommandBinding_Executed"
                         CanExecute="UndoCommandBinding_CanExecute"/>
         <CommandBinding Command="{x:Static commands:DataCommands.Create}"
@@ -17,16 +17,16 @@
         <CommandBinding Command="{x:Static commands:DataCommands.Edit}"
                         Executed="EditCommandBinding_Executed"
                         CanExecute="EditCommandBinding_CanExecute"/>
-        <CommandBinding Command="Save"
+        <CommandBinding Command="{x:Static commands:DataCommands.Save}"
                         Executed="SaveCommandBinding_Executed"
                         CanExecute="SaveCommandBinding_CanExecute"/>
-        <CommandBinding Command="Find"
+        <CommandBinding Command="{x:Static commands:DataCommands.Find}"
                         Executed="FindCommandBinding_Executed"
                         CanExecute="FindCommandBinding_CanExecute"/>
         <CommandBinding Command="{x:Static commands:DataCommands.Reload}"
                         Executed="ReloadCommandBinding_Executed"
                         CanExecute="ReloadCommandBinding_CanExecute"/>
-        <CommandBinding Command="Delete"
+        <CommandBinding Command="{x:Static commands:DataCommands.Delete}"
                         Executed="DeleteCommandBinding_Executed"
                         CanExecute="DeleteCommandBinding_CanExecute"/>
     </Page.CommandBindings>
@@ -58,7 +58,7 @@
             </Menu>
             
             <ToolBar>
-                <Button Command="Undo" ToolTip="Undo" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Undo}" ToolTip="Undo" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/UndoIcon.png" />
                 </Button>
                 
@@ -70,11 +70,11 @@
                     <Image Width="32" Height="32" Source="../../Resources/Icons/EditIcon.png" />
                 </Button>
                 
-                <Button Command="Save" ToolTip="Save" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Save}" ToolTip="Save" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/SaveIcon.png" />
                 </Button>
                 
-                <Button Command="Find" ToolTip="Find" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Find}" ToolTip="Find" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/FindIcon.png" />
                 </Button>
                 
@@ -82,7 +82,7 @@
                     <Image Width="32" Height="32" Source="../../Resources/Icons/ReloadIcon.png" />
                 </Button>
                 
-                <Button Command="Delete" ToolTip="Delete" Margin="5">
+                <Button Command="{x:Static commands:DataCommands.Delete}" ToolTip="Delete" Margin="5">
                     <Image Width="32" Height="32" Source="../../Resources/Icons/DeleteIcon.png" />
                 </Button>
                 
