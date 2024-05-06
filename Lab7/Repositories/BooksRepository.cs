@@ -50,6 +50,33 @@ public class BooksRepository
         
         Save();
     }
+    
+    // Create with publishers id
+    public void Create(string isbn, string title, string authors, int publishersCode, string publicationYear)
+    {
+        if (ValidateFields.IsbnExists(_dbContext, isbn))
+        {
+            throw new ArgumentException("ISBN already exists");
+        }
+        
+        if (!_dbContext.Publishers.Any(p => p.Id == publishersCode))
+        {
+            throw new ArgumentException("There are not exist any publishers with this id");
+        }
+        
+        var publicationYearShort = short.Parse(publicationYear);
+
+        _dbContext.Add(new Book
+        {
+            Isbn = isbn,
+            Title = title,
+            Authors = authors,
+            PublisherCode = publishersCode,
+            PublicationYear = publicationYearShort
+        });
+        
+        Save();
+    }
 
     public void Delete(string isbn)
     {
@@ -106,7 +133,7 @@ public class BooksRepository
     }
     
     // Update with publishers id
-    public void Update(string isbnInitial, string isbn, string title, string authors, int publishers, string publicationYear)
+    public void Update(string isbnInitial, string isbn, string title, string authors, int publishersCode, string publicationYear)
     {
         var isInitialIsbnExist = ValidateFields.IsbnExists(_dbContext, isbnInitial);
         
@@ -125,7 +152,7 @@ public class BooksRepository
             UpdateIsbn(isbnInitial, isbn);
         }
 
-        if (!_dbContext.Publishers.Any(p => p.Id == publishers))
+        if (!_dbContext.Publishers.Any(p => p.Id == publishersCode))
         {
             throw new ArgumentException("There are not exist any publishers with this id");
         }
@@ -136,7 +163,7 @@ public class BooksRepository
         
         initObject.Title = title;
         initObject.Authors = authors;
-        initObject.PublisherCode = publishers;
+        initObject.PublisherCode = publishersCode;
         initObject.PublicationYear = publicationYearShort;
         
         Save();
