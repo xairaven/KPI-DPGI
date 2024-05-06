@@ -14,12 +14,6 @@ public static class ValidateFields
 
             if (!book.Isbn.Equals(isbn)) continue;
             
-            MessageBox.Show(
-                messageBoxText: "There's already some ISBN like this",
-                caption: "Error!",
-                button: MessageBoxButton.OK,
-                icon: MessageBoxImage.Error,
-                defaultResult: MessageBoxResult.OK);
             return true;
         }
 
