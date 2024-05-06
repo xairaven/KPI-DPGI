@@ -97,7 +97,7 @@ public partial class MainPage : Page, IDisposable
         e.CanExecute = true;
     }
     private void FindCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
-        
+        new FindForm(_dbContext, JoinedGrid).Show();
     }
     
     private void ReloadCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
