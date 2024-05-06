@@ -25,7 +25,7 @@ public static class OperationContext
         var operationBook = BooksStack.Pop();
         BookOperationUndo(operationBook);
         
-        if (operationBook.Id == PublishersStack.Peek().Id)
+        if (PublishersStack.Count != 0 && operationBook.Id == PublishersStack.Peek().Id)
         {
             PublisherOperationUndo(PublishersStack.Pop());
         }
@@ -71,7 +71,7 @@ public static class OperationContext
         using var dbContext = new LibraryDbContext();
         try
         {
-            new BooksRepository(dbContext).Delete(newBook!.Isbn);
+            new BooksRepository(dbContext).Delete(newBook!.Isbn, isUndo: true);
         }
         catch (Exception exception)
         {
@@ -91,7 +91,8 @@ public static class OperationContext
         try
         {
             new BooksRepository(dbContext).Update(newBook.Isbn, oldBook.Isbn, 
-                oldBook.Title, oldBook.Authors, oldBook.PublisherCode, oldBook.PublicationYear.ToString()!);
+                oldBook.Title, oldBook.Authors, oldBook.PublisherCode, oldBook.PublicationYear.ToString()!,
+                isUndo: true);
         }
         catch (Exception exception)
         {
@@ -110,7 +111,7 @@ public static class OperationContext
         try
         {
             new BooksRepository(dbContext).Create(oldBook.Isbn, oldBook.Title, 
-                oldBook.Authors, oldBook.PublisherCode, oldBook.PublicationYear.ToString()!);
+                oldBook.Authors, oldBook.PublisherCode, oldBook.PublicationYear.ToString()!, isUndo: true);
         }
         catch (Exception exception)
         {

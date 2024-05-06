@@ -9,6 +9,8 @@ namespace Lab7.Views.Pages;
 
 public partial class MainPage : Page, IDisposable
 {
+    private bool _canUndo;
+    
     private readonly Frame _frame;
     private readonly Dictionary<string, Page> _pages;
     private readonly LibraryDbContext _dbContext;
@@ -42,10 +44,12 @@ public partial class MainPage : Page, IDisposable
     }
     
     private void UndoCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
-        e.CanExecute = true;
+        e.CanExecute = _canUndo;
     }
-    private void UndoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e) {
-        
+    private void UndoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        OperationContext.Pop();
+        _canUndo = OperationContext.Length > 0;
     }
     
     private void CreateCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
@@ -107,6 +111,7 @@ public partial class MainPage : Page, IDisposable
     private void ReloadCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         InitializeJoinedTable();
+        _canUndo = OperationContext.Length > 0;
     }
     
     
