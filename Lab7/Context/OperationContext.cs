@@ -105,7 +105,7 @@ public static class OperationContext
     
     private static void BookUndoDelete(Operation<Book> operation)
     {
-        var oldBook = operation.GetNewState()!;
+        var oldBook = operation.GetOldState()!;
 
         using var dbContext = new LibraryDbContext();
         try
