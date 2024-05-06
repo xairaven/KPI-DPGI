@@ -104,6 +104,43 @@ public class BooksRepository
         
         Save();
     }
+    
+    // Update with publishers id
+    public void Update(string isbnInitial, string isbn, string title, string authors, int publishers, string publicationYear)
+    {
+        var isInitialIsbnExist = ValidateFields.IsbnExists(_dbContext, isbnInitial);
+        
+        var isIsbnExist = ValidateFields.IsbnExists(_dbContext, isbn) && !isbnInitial.Equals(isbn);
+        if (!isInitialIsbnExist || isIsbnExist)
+        {
+            throw new ArgumentException("""
+                                        There are two conditions under which this error can occur:
+                                        1. Initial ISBN does not exist;
+                                        2. You are trying to change ISBN, and new ISBN already exist.
+                                        """);
+        }
+        
+        if (!isbnInitial.Equals(isbn))
+        {
+            UpdateIsbn(isbnInitial, isbn);
+        }
+
+        if (!_dbContext.Publishers.Any(p => p.Id == publishers))
+        {
+            throw new ArgumentException("There are not exist any publishers with this id");
+        }
+        
+        var publicationYearShort = short.Parse(publicationYear);
+
+        var initObject = _dbContext.Books.Find(isbn)!;
+        
+        initObject.Title = title;
+        initObject.Authors = authors;
+        initObject.PublisherCode = publishers;
+        initObject.PublicationYear = publicationYearShort;
+        
+        Save();
+    }
 
     private void UpdateIsbn(string isbnInitial, string isbn)
     {
